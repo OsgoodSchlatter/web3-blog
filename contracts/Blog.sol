@@ -65,19 +65,21 @@ contract Blog {
 
     }
 
-    function fetchPost() public view returns (Post[] memory){
+    function fetchPosts() public view returns (Post[] memory) {
         uint itemCount = _postIds.current();
-        uint currentIndex=0;
+        uint currentIndex = 0;
 
         Post[] memory posts = new Post[](itemCount);
-        for(uint i = 0; i < itemCount; i++) {
-            uint currentId = i+1;
+        for (uint i = 0; i < itemCount; i++) {
+            uint currentId = i + 1;
             Post storage currentItem = idToPost[currentId];
             posts[currentIndex] = currentItem;
             currentIndex += 1;
         }
         return posts;
     }
+
+
     modifier onlyOwner() {
         require((msg.sender == owner));
         _;
